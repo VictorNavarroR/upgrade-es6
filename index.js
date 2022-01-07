@@ -54,9 +54,9 @@ console.log(name, race);
 variables name y itv con sus respectivos valores. Posteriormente crea 
 3 variables usando igualmente el destructuring para cada uno de los años 
 y comprueba que todo esta bien imprimiendolo. */
-const car = {name: 'Mazda 6', itv: [2015, 2011, 2020] }
+const car = {name1: 'Mazda 6', itv: [2015, 2011, 2020] }
 
-const {name, itv} = car;
+const {name1, itv} = car;
 
 const [year1, year2, year3] = itv;
 
@@ -75,17 +75,17 @@ const toy = {name: 'Bus laiyiar', date: '20-30-1995', color: 'multicolor'};
 const toyCopy = {...toy};
 
 //3.3 Dado los siguientes arrays, crea un nuevo array juntandolos usando spread operatos.
-const pointsList = [32, 54, 21, 64, 75, 43];
+const pointsList1 = [32, 54, 21, 64, 75, 43];
 const pointsLis2 = [54,87,99,65,32];
 
-const newPoints = [...pointsList, ...pointsLis2];
+const newPoints = [...pointsList1, ...pointsLis2];
 
 /* 3.4 Dado los siguientes objetos. Crea un nuevo objeto fusionando los dos 
 con spread operators. */
-const toy = {name: 'Bus laiyiar', date: '20-30-1995', color: 'multicolor'};
+const toy1 = {name: 'Bus laiyiar', date: '20-30-1995', color: 'multicolor'};
 const toyUpdate = {lights: 'rgb', power: ['Volar like a dragon', 'MoonWalk']}
 
-const newToys = {...toy, ...toyUpdate};
+const newToys = {...toy1, ...toyUpdate};
 
 /* 3.5 Dado el siguiente array. Crear una copia de él eliminando la posición 2 
 pero sin editar el array inicial. De nuevo, usando spread operatos. */
@@ -137,3 +137,81 @@ cityNames = cities.map( city => {
   return city.name;
   
 });
+
+//Iteration#5
+/*
+5.1 Dado el siguiente array, utiliza .filter() para generar un nuevo array 
+con los valores que sean mayor que 18 
+*/
+const ages = [22, 14, 24, 55, 65, 21, 12, 13, 90];
+
+const mayorAges = ages.filter( age => age > 18);
+
+/* 5.2 Dado el siguiente array, utiliza .filter() para generar un nuevo array 
+con los valores que sean par. */
+const oddAges = ages.filter( age => {
+  if(age % 2 == 0) {
+    return age;
+  }
+});
+
+/* 5.3 Dado el siguiente array, utiliza .filter() para generar un nuevo array 
+con los streamers que tengan el gameMorePlayed = 'League of Legends'. */
+
+const streamers = [
+	{name: 'Rubius', age: 32, gameMorePlayed: 'Minecraft'},
+	{name: 'Ibai', age: 25, gameMorePlayed: 'League of Legends'}, 
+	{name: 'Reven', age: 43, gameMorePlayed: 'League of Legends'},
+	{name: 'AuronPlay', age: 33, gameMorePlayed: 'Among Us'}
+];
+
+const lolPlayers = streamers.filter( streamer => streamer.gameMorePlayed === 'League of Legends');
+
+
+/* 5.4 Dado el siguiente array, utiliza .filter() para generar un nuevo array 
+con los streamers que incluyan el caracter 'u' en su propiedad .name. Recomendamos 
+usar la funcion .includes() para la comprobación. */
+const uPlayers = streamers.filter( streamer => streamer.name.includes('u'));
+
+/* 5.5 utiliza .filter() para generar un nuevo array con los streamers que incluyan 
+el caracter 'Legends' en su propiedad .gameMorePlayed. Recomendamos usar la funcion 
+.includes() para la comprobación.
+Además, pon el valor de la propiedad .gameMorePlayed a MAYUSCULAS cuando 
+.age sea mayor que 35. */
+const legendPlayers = streamers.filter( streamer => {
+    if(streamer.gameMorePlayed.includes('Legends')) {
+        if(streamer.age > 35) {
+          streamer.gameMorePlayed = streamer.gameMorePlayed.toUpperCase();
+          return streamer;
+        }
+      return streamer;
+    }
+  });
+
+  /* 5.6 Dado el siguiente html y javascript, utiliza .filter() para mostrar por consola 
+los streamers que incluyan la palabra introducida en el input. De esta forma, si 
+introduzco 'Ru' me deberia de mostrar solo el streamer 'Rubius'. Si
+introduzco 'i', me deberia de mostrar el streamer 'Rubius' e 'Ibai'. */
+
+const inputElem = document.querySelector('[data-function="toFilterStreamers"]');
+
+inputElem.addEventListener('input', (e) => {
+  let filtro = e.target.value;
+
+  let newStremers = streamers.filter( elem => elem.name.includes(filtro));
+  console.log(newStremers);
+});
+
+
+/* 5.7 Dado el siguiente html y javascript, utiliza .filter() para mostrar por consola 
+los streamers que incluyan la palabra introducida en el input. De esta forma, si 
+introduzco 'Ru' me deberia de mostrar solo el streamer 'Rubius'. Si introduzco 'i', 
+me deberia de mostrar el streamer 'Rubius' e 'Ibai'.
+En este caso, muestra solo los streamers filtrados cuando hagamos click en el button. */
+const btnElem = document.querySelector('[data-function="toShowFilterStreamers"]');
+
+btnElem.addEventListener('click', (e) => {
+  let filtro = inputElem.value;
+  let newStremers = streamers.filter( elem => elem.name.includes(filtro));
+  console.log(newStremers);
+}); 
